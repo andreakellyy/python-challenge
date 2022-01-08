@@ -1,0 +1,42 @@
+word = input("Player 1 please enter the word: ")
+guesses = int(input ("Please enter the number of guesses: "))
+print(word + " and " + str(guesses) + " guesses")
+
+words = list(word)
+
+emptyList = []
+for x in range(len(word)):
+  emptyList.append("_")
+
+def underscores(lists, guess):
+  print("WORD: ", end = "")
+  for i in lists:
+    print(i, end=" ")
+  print("")
+
+def guessing(guesses, lists, wordList):
+  while guesses > 0 :
+    print("GUESSES LEFT: " + str(guesses))
+    guess = input("Guess a letter in the word: ")
+    if guess in wordList:
+      print("Correct.")
+      for i in range(len(wordList)):
+        if guess == wordList[i]:
+          index = wordList.index(guess)
+          wordList[index]=""
+          lists[index] = guess
+        #   print(index+1)
+          guesses -= 1
+    elif guess.isalpha() == False:
+      print("Invalid output.")
+      guesses -= 1
+    else:
+      print("Incorrect.")
+      guesses -= 1
+    if "_" not in lists:
+      guesses = 0
+    underscores(emptyList, guesses)
+    
+underscores(emptyList, guesses)
+guessing(guesses,emptyList,words)
+    
